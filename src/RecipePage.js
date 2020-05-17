@@ -1,55 +1,148 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './RecipePage.module.css';
 import Recipe from './Recipe';
 import { BsClock, BsBook, BsPerson } from 'react-icons/bs';
 import { Modal, Button } from 'react-bootstrap';
 import NavBar from './NavBar';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 export default () => {
+  const API_KEY = 'ca937a9553324b8d91d651d93a2b2409';
+  const location = useLocation();
+  // console.log(location.state);
   const [show, setShow] = useState(false);
+  const [fridgeIngred, setFridgeIngred] = useState([]);
+  const [seasonalIngred, setSeasonalIngred] = useState([]);
+  const [recipeName, setRecipeName] = useState('');
+  const [recipeImg, setRecipeImg] = useState('');
+  const [ingredAmount, setIngredAmount] = useState(0);
+  const [recipeId, setRecipeId] = useState('');
+  const [arrOfAllUsedIngred, setarrOfAllUsedIngred] = useState([]);
+  const [arrOfInstr, setarrOfInstr] = useState([]);
+  const [counter, setCounter] = useState(2);
+
+  useEffect(() => {
+    // const interval = setInterval(() => {
+    //   console.log('This will run every second!');
+    //   setCounter(counter => counter + 1);
+    // }, 5000);
+    axios
+      .all([
+        axios.get('http://localhost:3004/groceries'),
+        axios.get('http://localhost:3004/inSeasonFood')
+      ])
+      .then(
+        axios.spread((...responses) => {
+          const responseOne = responses[0];
+          const responseTwo = responses[1];
+          // use/access the results
+          let groceryData = responseOne.data.map(ele => {
+            return ele.title;
+          });
+          console.log('grocery', groceryData);
+          // setFridgeIngred(groceryData);
+          let inSeasonData = responseTwo.data[0].map(ele => {
+            return ele;
+          });
+          console.log('inseason', inSeasonData);
+          // setSeasonalIngred(inSeasonData);
+
+          let tempArr = groceryData.concat(inSeasonData);
+          const tempStr = tempArr.join(',+');
+          axios
+            .get(
+              `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${tempStr}&number=100&apiKey=${API_KEY}&vegan=true`
+            )
+            .then(resp => {
+              console.log('hello');
+              // console.log('RESPONSE:', resp.data);
+              console.log('ALL RECIPIES:', resp.data);
+              console.log('COUNTER', counter);
+              setRecipeId(resp.data[counter].id);
+              // console.log('ID:', resp.data[0].id);
+              setRecipeName(resp.data[counter].title);
+              setRecipeImg(resp.data[counter].image);
+              setIngredAmount(
+                resp.data[counter].usedIngredientCount +
+                  resp.data[counter].missedIngredientCount
+              );
+              // console.log('Missing INGR:', resp.data[0].missedIngredients);
+              let arrOfIngr = resp.data[counter].missedIngredients.concat(
+                resp.data[counter].usedIngredients
+              );
+              const finalArrOfIngr = arrOfIngr.map(ele => {
+                // console.log('ELEEEE:', ele);
+                return {
+                  imgURL: ele.image,
+                  ingredientName: ele.originalString
+                };
+              });
+              setarrOfAllUsedIngred(finalArrOfIngr);
+              return resp.data[counter].id;
+            })
+            .then(resp => {
+              // console.log('RESP:', resp);
+              axios
+                .get(
+                  `https://api.spoonacular.com/recipes/${resp}/analyzedInstructions?apiKey=${API_KEY}`
+                )
+                .then(resp => {
+                  console.log('RESP:', resp.data[0].steps);
+                  const instructions = resp.data[0].steps;
+                  const arrOfInstr = instructions.map(ele => {
+                    return ele.step;
+                  });
+                  setarrOfInstr(arrOfInstr);
+                });
+            });
+        })
+      )
+      .catch(errors => {
+        // react on errors.
+      });
+    // }, 5000);
+    // return () => clearInterval(interval);
+  }, []);
+
+  // const getRecipe = () => {
+  //   let tempArr = fridgeIngred.slice();
+  //   // console.log('SSSS', seasonalIngred);
+  //   tempArr = tempArr.concat(seasonalIngred);
+  //   const tempStr = tempArr.join(',+');
+  //   axios
+  //     .get(
+  //       `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${tempStr}&number=1&apiKey=42fc9d52bd6243f58f6cce82f2a45c50&vegan=true`
+  //     )
+  //     .then(resp => {
+  //       console.log('RESPONSE:', resp.data);
+  //       setRecipeId(resp.data[0].id);
+  //       console.log('ID:', resp.data[0].id);
+  //       setRecipeName(resp.data[0].title);
+  //       setRecipeImg(resp.data[0].image);
+  //       setIngredAmount(
+  //         resp.data[0].usedIngredientCount + resp.data[0].missedIngredientCount
+  //       );
+  //       console.log('Missing INGR:', resp.data[0].missedIngredients);
+  //       let arrOfIngr = resp.data[0].missedIngredients.concat(
+  //         resp.data[0].usedIngredients
+  //       );
+  //       const finalArrOfIngr = arrOfIngr.map(ele => {
+  //         console.log('ELEEEE:', ele);
+  //         return { imgURL: ele.image, ingredientName: ele.originalString };
+  //       });
+  //       setarrOfAllUsedIngred(finalArrOfIngr);
+  //     });
+  // };
+
+  // getRecipe();
+  // axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${tempStr}&number=2&apiKey=42fc9d52bd6243f58f6cce82f2a45c50&vegan=true`)
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const arrOfIngredients = [
-    {
-      imgURL:
-        'https://spoonacular.com/cdn/ingredients_100x100/white-powder.jpg',
-      ingredientName: '1 tsp baking powder'
-    },
-    {
-      imgURL: 'https://spoonacular.com/cdn/ingredients_100x100/cinnamon.jpg',
-      ingredientName: '1 tsp cinnamon'
-    },
-    {
-      imgURL: 'https://spoonacular.com/cdn/ingredients_100x100/apple.jpg',
-      ingredientName: '1 apple'
-    }
-  ];
-
-  const arrOfInstructions = [
-    'Preheat the oven to 200 degrees F.',
-    `Whisk together the flour, pecans, granulated sugar, light brown sugar, baking powder, baking soda, and salt in a medium bowl.`,
-    `Whisk together the eggs, buttermilk, butter and vanilla extract and
-    vanilla bean in a small bowl.`,
-    `Add the egg mixture to the dry mixture and gently mix to combine. Do
-    not overmix.`,
-    `Let the batter sit at room temperature for at least 15 minutes and
-    up to 30 minutes before using.`,
-    `Heat a cast iron or nonstick griddle pan over medium heat and brush
-    with melted butter. Once the butter begins to sizzle, use 2
-    tablespoons of the batter for each pancake and cook until the
-    bubbles appear on the surface and the bottom is golden brown, about
-    2 minutes, flip over and cook until the bottom is golden brown, 1 to
-    2 minutes longer.`,
-    `Transfer the pancakes to a platter and keep warm in a 200 degree F
-    oven.`,
-    `Serve 6 pancakes per person, top each with some of the bourbon
-    butter.`,
-    `Drizzle with warm maple syrup and dust with confectioners' sugar.`,
-    `Garnish with fresh mint sprigs and more toasted pecans, if desired.`
-  ];
-
+  const handleShow = () => {
+    // getRecipe();
+    setShow(true);
+  };
   return (
     <div>
       <NavBar selection={'recipe'} />
@@ -68,14 +161,15 @@ export default () => {
           }}
         >
           <img
-            src="https://www.diabetes.co.uk/wp-content/uploads/2019/01/iStock-10131071761-1.jpg"
+            // src="https://www.diabetes.co.uk/wp-content/uploads/2019/01/iStock-10131071761-1.jpg"
+            src={recipeImg}
             className="card-img-top shadow"
             alt="..."
             style={{ width: '100%' }}
           />
           <div className="card-body">
             <h5 className="card-title" style={{ fontWeight: '600' }}>
-              Brown Butter Apple Crumble
+              {recipeName}
             </h5>
             <hr />
             <div className={styles.iconDisplay}>
@@ -85,7 +179,7 @@ export default () => {
               </span>
               <span>
                 <BsBook style={{ marginBottom: '2.8px' }} />{' '}
-                <span className={styles.spanDisplay}>5</span>
+                <span className={styles.spanDisplay}>{ingredAmount}</span>
               </span>
               <span>
                 <BsPerson style={{ marginBottom: '2.8px' }} />{' '}
@@ -99,7 +193,7 @@ export default () => {
             </div>
             <br />
             <p className="card-text">
-              Some random text about the recipe above. Yummy sdfmcslkdmcslskvdms
+              Here is your personalized vegan recipe! Yum.
             </p>
             <button
               id={styles.recipeButton}
@@ -110,8 +204,9 @@ export default () => {
             </button>
             <Modal show={show} onHide={handleClose} id={styles.modal}>
               <Recipe
-                arrOfIngredients={arrOfIngredients}
-                arrOfInstructions={arrOfInstructions}
+                arrOfIngredients={arrOfAllUsedIngred}
+                arrOfInstructions={arrOfInstr}
+                recipeName={recipeName}
               />
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

@@ -14,8 +14,9 @@ import { Link, useHistory } from 'react-router-dom';
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
-export default ({ selection }) => {
+export default ({ selection, frideIngred, inSeasonFood }) => {
   const history = useHistory();
+  console.log('in :', inSeasonFood);
   return (
     <SideNav
       onSelect={selected => {
@@ -23,12 +24,18 @@ export default ({ selection }) => {
         if (selected === 'fridge') {
           history.push('/');
         } else {
-          history.push(`/${selected}`);
+          history.push(`/${selected}`, { inSeasonFood: inSeasonFood });
         }
       }}
     >
       <SideNav.Toggle />
       <SideNav.Nav defaultSelected={selection}>
+        <NavItem eventKey="fridge">
+          <NavIcon>
+            <RiTempColdLine size={30} />
+          </NavIcon>
+          <NavText>My Fridge</NavText>
+        </NavItem>
         <NavItem eventKey="recipe">
           {/* <Link to="/recipe"> */}
           <NavIcon>
@@ -36,12 +43,6 @@ export default ({ selection }) => {
           </NavIcon>
           {/* </Link> */}
           <NavText>This Week's Recipe</NavText>
-        </NavItem>
-        <NavItem eventKey="fridge">
-          <NavIcon>
-            <RiTempColdLine size={30} />
-          </NavIcon>
-          <NavText>My Fridge</NavText>
         </NavItem>
         <NavItem eventKey="inseason">
           <NavIcon>

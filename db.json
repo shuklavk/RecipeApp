@@ -1,0 +1,62 @@
+{
+  "groceries": [
+    {
+      "title": "apple",
+      "id": "apple"
+    },
+    {
+      "title": "banana",
+      "id": "banana"
+    },
+    {
+      "title": "mango",
+      "id": "mango"
+    },
+    {
+      "title": "bread",
+      "id": "bread"
+    },
+    {
+      "title": "oreo",
+      "id": "oreo"
+    },
+    {
+      "title": "strawberry",
+      "id": "strawberry"
+    },
+    {
+      "title": "celery",
+      "id": "celery"
+    }
+  ],
+  "inSeasonFood": [
+    [
+      "Apples",
+      "Apricots",
+      "Asparagus",
+      "Avocados",
+      "Bananas",
+      "Broccoli",
+      "Cabbage",
+      "Carrots",
+      "Celery",
+      "Collard Greens",
+      "Garlic",
+      "Kale",
+      "Kiwifruit",
+      "Lemons",
+      "Lettuce",
+      "Limes",
+      "Mushrooms",
+      "Onions",
+      "Peas",
+      "Pineapples",
+      "Radishes",
+      "Rhubarb",
+      "Spinach",
+      "Strawberries",
+      "Swiss Chard",
+      "Turnips"
+    ]
+  ]
+}

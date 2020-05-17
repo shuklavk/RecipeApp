@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import IngredientList from './IngredientList';
 
-export default ({ arrOfIngredients, arrOfInstructions }) => {
+export default ({ arrOfIngredients, arrOfInstructions, recipeName }) => {
   const instructionList = arrOfInstructions.map(inst => {
     return <li>{inst}</li>;
   });
@@ -10,9 +10,7 @@ export default ({ arrOfIngredients, arrOfInstructions }) => {
   return (
     <div>
       <Modal.Header closeButton>
-        <Modal.Title style={{ fontWeight: 600 }}>
-          Brown Butter Apple Crumble
-        </Modal.Title>
+        <Modal.Title style={{ fontWeight: 600 }}>{recipeName}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h4>
