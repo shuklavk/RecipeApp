@@ -1,0 +1,21 @@
+.iconDisplay {
+  display: flex;
+  justify-content: space-around;
+}
+
+#recipeButton {
+  background-color: #fe4e8a;
+  border: none;
+  width: 70%;
+}
+
+.spanDisplay {
+  color: #fe4e8a;
+  font-size: 18px;
+}
+
+#modal {
+  width: 50%;
+  max-width: none;
+  font-family: 'Josefin Sans', sans-serif;
+}
