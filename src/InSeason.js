@@ -160,7 +160,7 @@ export default () => {
     <div>
       <NavBar selection="inseason" inSeasonFood={inSeasonFood} />
       <div style={{ textAlign: 'center', padding: '30px' }}>
-        <h1>LOGO GOES HERE</h1>
+        <h1>IN SEASON HEADER GOES HERE</h1>
       </div>
       <section>
         <div className="container">
