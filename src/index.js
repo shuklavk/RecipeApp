@@ -1,7 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import NavBar from './NavBar';
+import RecipePage from './RecipePage';
+import InSeason from './InSeason';
+import Fridge from './Fridge';
+import FridgeList from './FridgeList';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-ReactDOM.render(<NavBar />, document.getElementById('root'));
+ReactDOM.render(
+  <BrowserRouter>
+    <div>
+      <Route exact path="/" component={Fridge} />
+      <Route path="/recipe">
+        <RecipePage />
+      </Route>
+      <Route path="/inseason">
+        <InSeason />
+      </Route>
+    </div>
+  </BrowserRouter>,
+  document.getElementById('root')
+);

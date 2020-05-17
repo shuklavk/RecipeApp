@@ -1,0 +1,14 @@
+.fridge2 {
+  width: 65%;
+  /* height: 50%; */
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.836);
+  border: 10px solid black;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}

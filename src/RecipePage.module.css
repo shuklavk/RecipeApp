@@ -3,14 +3,20 @@
   justify-content: space-around;
 }
 
+html {
+  min-height: 100%; /* make sure it is at least as tall as the viewport */
+  position: relative;
+}
+
 #recipeButton {
-  background-color: #fe4e8a;
+  /* background-color: #fe4e8a; */
+  background-color: #db3d44;
   border: none;
   width: 70%;
 }
 
 .spanDisplay {
-  color: #fe4e8a;
+  color: #db3d44;
   font-size: 18px;
 }
 
