@@ -6,9 +6,10 @@ import { Modal, Button } from 'react-bootstrap';
 import NavBar from './NavBar';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import logo from './LOGO.png';
 
 export default () => {
-  const API_KEY = 'ca937a9553324b8d91d651d93a2b2409';
+  const API_KEY = '7ece519da33d4fb485356a146e21fc5b';
   const location = useLocation();
   // console.log(location.state);
   const [show, setShow] = useState(false);
@@ -20,7 +21,8 @@ export default () => {
   const [recipeId, setRecipeId] = useState('');
   const [arrOfAllUsedIngred, setarrOfAllUsedIngred] = useState([]);
   const [arrOfInstr, setarrOfInstr] = useState([]);
-  const [counter, setCounter] = useState(2);
+  let randNum = Math.floor(Math.random() * 100);
+  const [counter, setCounter] = useState(randNum);
 
   useEffect(() => {
     // const interval = setInterval(() => {
@@ -52,7 +54,7 @@ export default () => {
           const tempStr = tempArr.join(',+');
           axios
             .get(
-              `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${tempStr}&number=100&apiKey=${API_KEY}&vegan=true`
+              `https://api.spoonacular.com/recipes/findByIngredients?vegan=true&ingredients=${tempStr}&number=100&apiKey=${API_KEY}`
             )
             .then(resp => {
               console.log('hello');
@@ -116,17 +118,19 @@ export default () => {
     <div>
       <NavBar selection={'recipe'} />
       <header style={{ textAlign: 'center', padding: '30px' }}>
-        <h1>PUT LOGO HERE</h1>
+        <img src={logo} style={{ width: '200px' }} />
+        <h1 style={{ fontSize: '3rem' }}>Your Recipe</h1>
       </header>
       <div className="container">
         <div
           className="card shadow-lg"
           style={{
-            width: '400px',
+            width: '557px',
             margin: '0 auto',
             textAlign: 'center',
             fontFamily: "'Josefin Sans', sans-serif",
-            transform: 'none'
+            transform: 'none',
+            marginBottom: '100px'
           }}
         >
           <img

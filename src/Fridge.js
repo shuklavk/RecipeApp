@@ -4,6 +4,7 @@ import FridgeList from './FridgeList';
 import styles from './Fridge.module.css';
 import { useState } from 'react';
 import { bottom } from '@popperjs/core';
+import logo from './LOGO.png';
 
 export default () => {
   const [frideIngred, setFridgeIng] = useState([]);
@@ -11,7 +12,8 @@ export default () => {
   return (
     <div>
       <header style={{ textAlign: 'center', padding: '30px' }}>
-        <h1>MY FRIDGE</h1>
+        <img src={logo} style={{height:'200px'}} />
+        <h1 style={{ fontSize: '3rem' }}>MY FRIDGE</h1>
       </header>
       <NavBar selection="fridge" frideIngred={frideIngred} />
       <div className="container">

@@ -1,6 +1,10 @@
 {
   "groceries": [
     {
+      "title": "carrot ",
+      "id": "carrot "
+    },
+    {
       "title": "apple",
       "id": "apple"
     },
@@ -13,20 +17,24 @@
       "id": "mango"
     },
     {
-      "title": "bread",
-      "id": "bread"
+      "title": "carrot",
+      "id": "carrot"
     },
     {
-      "title": "oreo",
-      "id": "oreo"
+      "title": "lettuce",
+      "id": "lettuce"
     },
     {
-      "title": "strawberry",
-      "id": "strawberry"
+      "title": "pasta",
+      "id": "pasta"
     },
     {
-      "title": "celery",
-      "id": "celery"
+      "title": "onions",
+      "id": "onions"
+    },
+    {
+      "title": "squash",
+      "id": "squash"
     }
   ],
   "inSeasonFood": [

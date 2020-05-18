@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './FridgeList.module.css';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import logo from './LOGO.png';
 
 function Todo({ todo, index, removeTodo }) {
   return (

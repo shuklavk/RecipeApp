@@ -3,6 +3,7 @@ import './InSeason.scss';
 import NavBar from './NavBar';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import logo from './LOGO.png';
 
 export default () => {
   const [inSeasonFood, setInSeasonFood] = useState([
@@ -160,7 +161,8 @@ export default () => {
     <div>
       <NavBar selection="inseason" inSeasonFood={inSeasonFood} />
       <div style={{ textAlign: 'center', padding: '30px' }}>
-        <h1>IN SEASON HEADER GOES HERE</h1>
+        <img src={logo} style={{ width: '200px' }} />
+        <h1 style={{ fontSize: '3rem' }}>IN SEASON PRODUCE</h1>
       </div>
       <section>
         <div className="container">
