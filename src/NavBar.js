@@ -9,7 +9,7 @@ import SideNav, {
 } from '@trendmicro/react-sidenav';
 import { RiTempColdLine } from 'react-icons/ri';
 import { FaUtensils } from 'react-icons/fa';
-import { BsSun } from 'react-icons/bs';
+import { BsSun, BsFillCalendarFill } from 'react-icons/bs';
 import { Link, useHistory } from 'react-router-dom';
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
@@ -49,6 +49,12 @@ export default ({ selection, frideIngred, inSeasonFood }) => {
             <BsSun size={30} />
           </NavIcon>
           <NavText>In Season Food</NavText>
+        </NavItem>
+        <NavItem eventKey="calendar">
+          <NavIcon>
+            <BsFillCalendarFill size={30} />
+          </NavIcon>
+          <NavText>Calendar</NavText>
         </NavItem>
       </SideNav.Nav>
     </SideNav>

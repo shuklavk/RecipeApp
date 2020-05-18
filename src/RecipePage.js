@@ -104,37 +104,6 @@ export default () => {
     // }, 5000);
     // return () => clearInterval(interval);
   }, []);
-
-  // const getRecipe = () => {
-  //   let tempArr = fridgeIngred.slice();
-  //   // console.log('SSSS', seasonalIngred);
-  //   tempArr = tempArr.concat(seasonalIngred);
-  //   const tempStr = tempArr.join(',+');
-  //   axios
-  //     .get(
-  //       `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${tempStr}&number=1&apiKey=42fc9d52bd6243f58f6cce82f2a45c50&vegan=true`
-  //     )
-  //     .then(resp => {
-  //       console.log('RESPONSE:', resp.data);
-  //       setRecipeId(resp.data[0].id);
-  //       console.log('ID:', resp.data[0].id);
-  //       setRecipeName(resp.data[0].title);
-  //       setRecipeImg(resp.data[0].image);
-  //       setIngredAmount(
-  //         resp.data[0].usedIngredientCount + resp.data[0].missedIngredientCount
-  //       );
-  //       console.log('Missing INGR:', resp.data[0].missedIngredients);
-  //       let arrOfIngr = resp.data[0].missedIngredients.concat(
-  //         resp.data[0].usedIngredients
-  //       );
-  //       const finalArrOfIngr = arrOfIngr.map(ele => {
-  //         console.log('ELEEEE:', ele);
-  //         return { imgURL: ele.image, ingredientName: ele.originalString };
-  //       });
-  //       setarrOfAllUsedIngred(finalArrOfIngr);
-  //     });
-  // };
-
   // getRecipe();
   // axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${tempStr}&number=2&apiKey=42fc9d52bd6243f58f6cce82f2a45c50&vegan=true`)
 

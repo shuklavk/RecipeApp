@@ -5,6 +5,7 @@ import RecipePage from './RecipePage';
 import InSeason from './InSeason';
 import Fridge from './Fridge';
 import FridgeList from './FridgeList';
+import Calendar from './Calendar';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 ReactDOM.render(
@@ -16,6 +17,9 @@ ReactDOM.render(
       </Route>
       <Route path="/inseason">
         <InSeason />
+      </Route>
+      <Route path="/calendar">
+        <Calendar />
       </Route>
     </div>
   </BrowserRouter>,

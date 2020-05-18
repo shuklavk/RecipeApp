@@ -11,7 +11,7 @@ export default () => {
   return (
     <div>
       <header style={{ textAlign: 'center', padding: '30px' }}>
-        <h1>FRIDGE HEADER HERE</h1>
+        <h1>MY FRIDGE</h1>
       </header>
       <NavBar selection="fridge" frideIngred={frideIngred} />
       <div className="container">
